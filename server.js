@@ -12,7 +12,7 @@ var App = function(){
 
   // Setup
   
-  self.dbServer = new mongodb.Server(process.env.OPENSHIFT_NOSQL_DB_HOST, parseInt(process.env.OPENSHIFT_NOSQL_DB_PORT));
+  self.dbServer = new mongodb.Server(process.env.OPENSHIFT_NOSQL_DB_HOST,parseInt(process.env.OPENSHIFT_NOSQL_DB_PORT));
   self.db = new mongodb.Db('parks', self.dbServer, {auto_reconnect: true});
   self.dbUser = process.env.OPENSHIFT_NOSQL_DB_USERNAME;
   self.dbPass = process.env.OPENSHIFT_NOSQL_DB_PASSWORD;
@@ -55,7 +55,7 @@ var App = function(){
   self.connectDb = function(callback){
     self.db.open(function(err, db){
       if(err){ throw err };
-      self.db.authenticate(self.dbUser, self.dbPass, function(err, res){
+      self.db.authenticate(self.dbUser, self.dbPass, {authdb: "admin"}, function(err, res){
         if(err){ throw err };
         callback();
       });
