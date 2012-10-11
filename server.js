@@ -34,7 +34,7 @@ var App = function(){
   self.route['root'] = function(req, res){res.send('You have come to the park apps web service. All the web services are at /ws/parks*. For example /ws/parks will return all the parks in the system in a JSON payload. Thanks for stopping by and have a nice day');}'
   
   self.routes['returnAllParks'] = function(req, res){
-    self.db.collection('names').find().toArray(function(err, names) {
+    self.db.collection('parkpoints').find().toArray(function(err, names) {
         res.header("Content-Type:","text/json");
         res.end(JSON.stringify(names));
     });
