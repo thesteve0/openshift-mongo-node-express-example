@@ -32,13 +32,16 @@ var App = function(){
   self.routes['health'] = function(req, res){ res.send('1'); };
   
   self.routes['root'] = function(req, res){res.send('You have come to the park apps web service. All the web services are at /ws/parks*. For example /ws/parks will return all the parks in the system in a JSON payload. Thanks for stopping by and have a nice day'); };
-  
+
+  //returns all the parks in the collection
   self.routes['returnAllParks'] = function(req, res){
     self.db.collection('parkpoints').find().toArray(function(err, names) {
-        res.header("Content-Type:","text/json");
+        res.header("Content-Type:","application/json");
         res.end(JSON.stringify(names));
     });
   };
+
+
 
   // Web app urls
   
@@ -46,6 +49,8 @@ var App = function(){
   self.app.get('/health', self.routes['health']);
   self.app.get('/', self.routes['root']);
   self.app.get('/ws/parks', self.routes['returnAllParks']);
+  self.app.get('/ws/parks/park???????????', self.routes['returnAllParks']);
+  
  
 
 
