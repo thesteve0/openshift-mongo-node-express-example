@@ -30,19 +30,22 @@ var App = function(){
   // Web app logic
   self.routes = {};
   self.routes['health'] = function(req, res){ res.send('1'); };
-
-  self.routes['root'] = function(req, res){
+  
+  self.route['root'] = function(req, res){res.send('You have come to the park apps web service. All the web services are at /ws/parks*. For example /ws/parks will return all the parks in the system in a JSON payload. Thanks for stopping by and have a nice day');}'
+  
+  self.routes['returnAllParks'] = function(req, res){
     self.db.collection('names').find().toArray(function(err, names) {
         res.header("Content-Type:","text/json");
         res.end(JSON.stringify(names));
     });
   };
 
-    // Webapp urls
+  // Web app urls
   
   self.app  = express.createServer();
   self.app.get('/health', self.routes['health']);
   self.app.get('/', self.routes['root']);
+  self.app.get('/ws/parks', self.routes['returnAllParks']);
  
 
 
