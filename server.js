@@ -41,6 +41,16 @@ var App = function(){
     });
   };
 
+  self.routes['returnAPark'] = function(req, res){
+      var BSON = mongo.BSONPure;
+      var parkObjectID = new BSON.ObjectID(req.params.id);
+      self.db.collection('parkpoints').find({'id':parkObjectID}).toArray(function(err, names){
+              res.header("Content-Type:","application/json");
+              res.end(JSON.stringify(names));
+      });
+  };
+
+
 
 
   // Web app urls
@@ -49,7 +59,7 @@ var App = function(){
   self.app.get('/health', self.routes['health']);
   self.app.get('/', self.routes['root']);
   self.app.get('/ws/parks', self.routes['returnAllParks']);
-  self.app.get('/ws/parks/park???????????', self.routes['returnAllParks']);
+  self.app.get('/ws/parks/park/:id', self.routes['returnAPark']);
   
  
 
