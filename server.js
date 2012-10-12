@@ -80,7 +80,7 @@ var App = function(){
      //var name = req.body.name;
      //var lat = req.body.lat;
      //var lon = req.body.lon;
-     console.log(req);
+     console.log(req.body);
      res.end("success!!")
      //self.db.collection('parkpoints').insert({'name' : name, 'pos' : [lon,lat ]}), function(docs){};
   };
@@ -92,6 +92,11 @@ var App = function(){
   // Web app urls
   
   self.app  = express.createServer();
+  //This uses the Connect frameworks body parser to parse the body of the post request
+  app.configure(function () {
+        app.use(express.bodyParser());
+  });
+
   self.app.get('/health', self.routes['health']);
   self.app.get('/', self.routes['root']);
   self.app.get('/ws/parks', self.routes['returnAllParks']);
