@@ -66,6 +66,19 @@ var App = function(){
   };
 
 
+  self.routes['returnParkNameNear'] = function(req, res){
+
+      var lat = parseFloat(req.query.lat);
+      var lon = parseFloat(req.query.lon);
+      var name = req.params.name;
+
+      self.db.collection('parkpoints'.find( {"Name" : {$regex : name, $options : 'i'}, "pos" : { $near : [lon,lat]}})).toArray(function(err,names){
+          res.header("Content-Type:","application/json");
+          res.end(JSON.stringify(names));
+      });
+
+  };
+
 
 
   // Web app urls
@@ -76,6 +89,7 @@ var App = function(){
   self.app.get('/ws/parks', self.routes['returnAllParks']);
   self.app.get('/ws/parks/park/:id', self.routes['returnAPark']);
   self.app.get('/ws/parks/near', self.routes['returnParkNear']);
+  self.app.get('/ws/parks/name/near/:name', self.routes['returnParkNameNear']);
   
  
 
