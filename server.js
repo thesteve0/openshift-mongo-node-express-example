@@ -83,7 +83,7 @@ var App = function(){
      console.log(req.body);
 
      //we use safe:true because we want an error if it eventually fails to insert
-     self.db.collection('parkpoints').insert({'Name' : name, 'pos' : [lon,lat ]}), {safe:true}, function(docs){
+     self.db.collection('parkpoints').insert({'Name' : name, 'pos' : [lon,lat ]}), function(docs){
          //we should have caught errors here for a real app
          //res.status(200);
          res.end('success');
@@ -97,7 +97,7 @@ var App = function(){
 
   // Web app urls
   
-  self.app  = express.createServer();
+  self.app  = express();
 
   //This uses the Connect frameworks body parser to parse the body of the post request
   self.app.configure(function () {
