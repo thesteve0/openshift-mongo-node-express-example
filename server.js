@@ -97,7 +97,6 @@ var App = function(){
   self.app.configure(function () {
         self.app.use(express.bodyParser());
         self.app.use(express.methodOverride());
-        self.app.use(express.static(path.join(application_root, "public")));
         self.app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
   });
 
