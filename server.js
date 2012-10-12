@@ -92,9 +92,10 @@ var App = function(){
   // Web app urls
   
   self.app  = express.createServer();
+
   //This uses the Connect frameworks body parser to parse the body of the post request
-  app.configure(function () {
-        app.use(express.bodyParser());
+  self.app.configure(function () {
+        self.app.use(express.bodyParser());
   });
 
   self.app.get('/health', self.routes['health']);
