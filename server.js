@@ -80,7 +80,7 @@ var App = function(){
      //var name = req.body.name;
      //var lat = req.body.lat;
      //var lon = req.body.lon;
-     console.log(req.body);
+     console.log(req);
      res.end("success!!")
      //self.db.collection('parkpoints').insert({'name' : name, 'pos' : [lon,lat ]}), function(docs){};
   };
