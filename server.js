@@ -75,13 +75,13 @@ var App = function(){
       });
   };
 
-  self.routes['putAPark'] = function(req, res){
+  self.routes['postAPark'] = function(req, res){
 
      //var name = req.body.name;
      //var lat = req.body.lat;
      //var lon = req.body.lon;
      console.log(req.body);
-
+     res.end("success!!")
      //self.db.collection('parkpoints').insert({'name' : name, 'pos' : [lon,lat ]}), function(docs){};
   };
 
@@ -98,7 +98,7 @@ var App = function(){
   self.app.get('/ws/parks/park/:id', self.routes['returnAPark']);
   self.app.get('/ws/parks/near', self.routes['returnParkNear']);
   self.app.get('/ws/parks/name/near/:name', self.routes['returnParkNameNear']);
-  self.app.post('/ws/parks/park', self.routes['putAPark']);
+  self.app.post('/ws/parks/park', self.routes['postAPark']);
 
   
  
