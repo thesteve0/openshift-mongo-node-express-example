@@ -77,9 +77,9 @@ var App = function(){
 
   self.routes['putAPark'] = function(req, res){
 
-     var name = req.body.name;
-     var lat = req.body.lat;
-     var lon = req.body.lon;
+     //var name = req.body.name;
+     //var lat = req.body.lat;
+     //var lon = req.body.lon;
      console.log(req.body);
      //self.db.collection('parkpoints').insert({'name' : name, 'pos' : [lon,lat ]}), function(docs){};
   };
