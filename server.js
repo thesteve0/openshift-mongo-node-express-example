@@ -72,7 +72,7 @@ var App = function(){
       var lon = parseFloat(req.query.lon);
       var name = req.params.name;
 
-      self.db.collection('parkpoints'.find( {"Name" : {$regex : name, $options : 'i'}, "pos" : { $near : [lon,lat]}})).toArray(function(err,names){
+      self.db.collection('parkpoints').find( {"Name" : {$regex : name, $options : 'i'}, "pos" : { $near : [lon,lat]}})).toArray(function(err,names){
           res.header("Content-Type:","application/json");
           res.end(JSON.stringify(names));
       });
