@@ -81,6 +81,7 @@ var App = function(){
      //var lat = req.body.lat;
      //var lon = req.body.lon;
      console.log(req.body);
+
      //self.db.collection('parkpoints').insert({'name' : name, 'pos' : [lon,lat ]}), function(docs){};
   };
 
@@ -97,7 +98,7 @@ var App = function(){
   self.app.get('/ws/parks/park/:id', self.routes['returnAPark']);
   self.app.get('/ws/parks/near', self.routes['returnParkNear']);
   self.app.get('/ws/parks/name/near/:name', self.routes['returnParkNameNear']);
-  self.app.put('/ws/parks/park', self.routes['putAPark']);
+  self.app.post('/ws/parks/park', self.routes['putAPark']);
 
   
  
