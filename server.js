@@ -81,9 +81,11 @@ var App = function(){
      var lat = req.body.lat;
      var lon = req.body.lon;
      console.log(req.body);
-     self.db.collection('parkpoints').insert({'Name' : name, 'pos' : [lon,lat ]}), function(docs){
+
+     //we use safe:true because we want an error if it eventually fails to insert
+     self.db.collection('parkpoints').insert({'Name' : name, 'pos' : [lon,lat ]}), {safe:true}, function(docs){
          //we should have caught errors here for a real app
-         res.status(200);
+         //res.status(200);
          res.end('success');
          //res.end(docs);
      };
