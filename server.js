@@ -17,7 +17,6 @@ var App = function(){
 
   self.ipaddr  = process.env.OPENSHIFT_INTERNAL_IP;
   self.port    = parseInt(process.env.OPENSHIFT_INTERNAL_PORT) || 8080;
-
   if (typeof self.ipaddr === "undefined") {
     console.warn('No OPENSHIFT_INTERNAL_IP environment variable');
   };
