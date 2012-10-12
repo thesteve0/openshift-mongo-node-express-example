@@ -84,7 +84,8 @@ var App = function(){
      self.db.collection('parkpoints').insert({'Name' : name, 'pos' : [lon,lat ]}), function(docs){
          //we should have caught errors here for a real app
          res.status(200);
-         res.end(docs);
+         res.end('success');
+         //res.end(docs);
      };
   };
 
