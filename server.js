@@ -7,11 +7,9 @@ var mongodb = require('mongodb');
 var App = function(){
 
   // Scope
-
   var self = this;
 
   // Setup
-  
   self.dbServer = new mongodb.Server(process.env.OPENSHIFT_NOSQL_DB_HOST,parseInt(process.env.OPENSHIFT_NOSQL_DB_PORT));
   self.db = new mongodb.Db('parks', self.dbServer, {auto_reconnect: true});
   self.dbUser = process.env.OPENSHIFT_NOSQL_DB_USERNAME;
@@ -23,9 +21,7 @@ var App = function(){
   if (typeof self.ipaddr === "undefined") {
     console.warn('No OPENSHIFT_INTERNAL_IP environment variable');
   };
-  
-  
-   
+
 
   // Web app logic
   self.routes = {};
@@ -103,6 +99,7 @@ var App = function(){
         self.app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
   });
 
+  //define all the url mappings
   self.app.get('/health', self.routes['health']);
   self.app.get('/', self.routes['root']);
   self.app.get('/ws/parks', self.routes['returnAllParks']);
@@ -110,11 +107,6 @@ var App = function(){
   self.app.get('/ws/parks/near', self.routes['returnParkNear']);
   self.app.get('/ws/parks/name/near/:name', self.routes['returnParkNameNear']);
   self.app.post('/ws/parks/park', self.routes['postAPark']);
-
-  
- 
-
-
 
   // Logic to open a database connection. We are going to call this outside of app so it is available to all our functions inside.
 
@@ -130,7 +122,6 @@ var App = function(){
   
   
   //starting the nodejs server with express
-
   self.startServer = function(){
     self.app.listen(self.port, self.ipaddr, function(){
       console.log('%s: Node server started on %s:%d ...', Date(Date.now()), self.ipaddr, self.port);
@@ -138,7 +129,6 @@ var App = function(){
   }
 
   // Destructors
-
   self.terminator = function(sig) {
     if (typeof sig === "string") {
       console.log('%s: Received %s - terminating Node server ...', Date(Date.now()), sig);
