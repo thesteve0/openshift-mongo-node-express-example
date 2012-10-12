@@ -41,6 +41,7 @@ var App = function(){
     });
   };
 
+  //find a single park by passing in the objectID to the URL
   self.routes['returnAPark'] = function(req, res){
       var BSON = mongodb.BSONPure;
       var parkObjectID = new BSON.ObjectID(req.params.id);
@@ -48,6 +49,20 @@ var App = function(){
               res.header("Content-Type:","application/json");
               res.end(JSON.stringify(names));
       });
+  };
+
+
+  //find parks near a certain lat and lon passed in as query parameters (near?lat=45.5&lon=-82)
+  self.routes['returnParkNear'] = function(req, res){
+
+      //in production you would do some sanity checks on these values before parsing and handle the error if they don't parse
+      var lat = parseFloat(req.query.lat);
+      var lon = parseFloat(req.query.lon);
+
+      self.db.collection('parkpoints').find( {"pos" : {$near: [lon,lat]}}).toArray(function(err,names){
+          res.header("Content-Type:","application/json");
+          res.end(JSON.stringify(names));
+       });
   };
 
 
@@ -60,6 +75,7 @@ var App = function(){
   self.app.get('/', self.routes['root']);
   self.app.get('/ws/parks', self.routes['returnAllParks']);
   self.app.get('/ws/parks/park/:id', self.routes['returnAPark']);
+  self.app.get('ws/parks/near', self.routes['returnParkNear']);
   
  
 
