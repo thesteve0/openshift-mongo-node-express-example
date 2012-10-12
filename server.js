@@ -77,12 +77,11 @@ var App = function(){
 
   self.routes['postAPark'] = function(req, res){
 
-     //var name = req.body.name;
-     //var lat = req.body.lat;
-     //var lon = req.body.lon;
+     var name = req.body.name;
+     var lat = req.body.lat;
+     var lon = req.body.lon;
      console.log(req.body);
-     res.end("success!!")
-     //self.db.collection('parkpoints').insert({'name' : name, 'pos' : [lon,lat ]}), function(docs){};
+     self.db.collection('parkpoints').insert({'name' : name, 'pos' : [lon,lat ]}), function(docs){res.end("success!!");};
   };
 
 
