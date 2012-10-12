@@ -54,7 +54,6 @@ var App = function(){
 
   //find parks near a certain lat and lon passed in as query parameters (near?lat=45.5&lon=-82)
   self.routes['returnParkNear'] = function(req, res){
-
       //in production you would do some sanity checks on these values before parsing and handle the error if they don't parse
       var lat = parseFloat(req.query.lat);
       var lon = parseFloat(req.query.lon);
@@ -67,17 +66,25 @@ var App = function(){
 
 
   self.routes['returnParkNameNear'] = function(req, res){
-
       var lat = parseFloat(req.query.lat);
       var lon = parseFloat(req.query.lon);
       var name = req.params.name;
-
       self.db.collection('parkpoints').find( {"Name" : {$regex : name, $options : 'i'}, "pos" : { $near : [lon,lat]}}).toArray(function(err,names){
           res.header("Content-Type:","application/json");
           res.end(JSON.stringify(names));
       });
-
   };
+
+  self.routes['putAPark'] = function(req, res){
+
+     var name = req.body.name;
+     var lat = req.body.lat;
+     var lon = req.body.lon;
+
+     self.db.collection('parkpoints').insert({'name' : name, 'pos' : [lon,lat ]}), function(docs){};
+  };
+
+
 
 
 
@@ -90,6 +97,8 @@ var App = function(){
   self.app.get('/ws/parks/park/:id', self.routes['returnAPark']);
   self.app.get('/ws/parks/near', self.routes['returnParkNear']);
   self.app.get('/ws/parks/name/near/:name', self.routes['returnParkNameNear']);
+  self.app.put('/ws/parks/park', self.routes['putAPark']);
+
   
  
 
