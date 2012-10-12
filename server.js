@@ -44,7 +44,7 @@ var App = function(){
   self.routes['returnAPark'] = function(req, res){
       var BSON = mongodb.BSONPure;
       var parkObjectID = new BSON.ObjectID(req.params.id);
-      self.db.collection('parkpoints').find({'id':parkObjectID}).toArray(function(err, names){
+      self.db.collection('parkpoints').find({'_id':parkObjectID}).toArray(function(err, names){
               res.header("Content-Type:","application/json");
               res.end(JSON.stringify(names));
       });
