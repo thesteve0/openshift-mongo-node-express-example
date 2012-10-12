@@ -82,12 +82,9 @@ var App = function(){
      var lon = req.body.lon;
      console.log(req.body);
 
-     //we use safe:true because we want an error if it eventually fails to insert
-     self.db.collection('parkpoints').insert({'Name' : name, 'pos' : [lon,lat ]}), function(docs){
+     self.db.collection('parkpoints').insert({'Name' : name, 'pos' : [lon,lat ]}), function(result){
          //we should have caught errors here for a real app
-         //res.status(200);
          res.end('success');
-         //res.end(docs);
      };
   };
 
