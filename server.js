@@ -75,7 +75,7 @@ var App = function(){
   self.app.get('/', self.routes['root']);
   self.app.get('/ws/parks', self.routes['returnAllParks']);
   self.app.get('/ws/parks/park/:id', self.routes['returnAPark']);
-  self.app.get('ws/parks/near', self.routes['returnParkNear']);
+  self.app.get('/ws/parks/near', self.routes['returnParkNear']);
   
  
 
