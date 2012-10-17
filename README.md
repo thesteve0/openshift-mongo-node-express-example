@@ -1,7 +1,10 @@
 #A simple Node.JS, Express, and Mongo template for OpenShift
-This is a simple Node.JS template that uses Express and has mongodb set up. It is all wired to go in OpenShift. I would not reccomend using this for a more complicated application, as there should be more seperation into different files for different logic.
+This is the completed application to go with this blog post:
+????????????
 
 ##How to use
+
+?????????????These need to be changed as well
 Assuming you already have an OpenShift account
 1) Create a Node.JS application and add a mongo cartridge
 
